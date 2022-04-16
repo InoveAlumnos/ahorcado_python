@@ -73,7 +73,7 @@ imagenes = [
 def dibujar(palabra_secreta, lista_letras_usadas, intentos_invalidos):
     '''Funcion que dibujar la interfaz del ahorcado
        Argumentos:
-       - palabra_secreta [string]: Palabra secreta que debe adivinar el juegado
+       - palabra_secreta [string]: Palabra secreta que debe adivinar el jugador
        - lista_letras_usadas [lista]: Lista de letras usadas hasta el momento
        - intentos_invalidos [int]: Cantidad de intentos invalidos:
                                      - 0 --> no hubo errores
@@ -84,7 +84,7 @@ def dibujar(palabra_secreta, lista_letras_usadas, intentos_invalidos):
 
     # Analizo si alguna letra utilizada está en la palabra secreta
     for letra in lista_letras_usadas:
-        # Si la leta se utiliza en la palabra secreta, busco donde
+        # Si la letra se utiliza en la palabra secreta, busco donde
         if letra in palabra_secreta:
             for i in range(len(palabra_secreta)):
                 # Reemplazo en palabra oculta con la letra
@@ -98,10 +98,11 @@ def dibujar(palabra_secreta, lista_letras_usadas, intentos_invalidos):
     print("".join(palabra_oculta))
     print("Letras utilizadas:")
     print(lista_letras_usadas)
+    return palabra_oculta
 
 if __name__ == "__main__":
     # Probar la interfaz
     palabra_secreta = "palabra"
-    lista_letras_usadas = ["a", "p"]
+    lista_letras_usadas = ["a", "p", "l", "b", "r"]
     dibujar(palabra_secreta, lista_letras_usadas, 3)
 
