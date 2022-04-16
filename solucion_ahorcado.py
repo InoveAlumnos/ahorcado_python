@@ -73,6 +73,37 @@ def ahorcado(palabra):
     # Esto se realiza para que el jugador pueda ver al principio
     # la cantidad de letras de la palabra a adivinar.
     interfaz.dibujar(palabra, letras_usadas, intentos)
+    
+    while intentos < MAX_CANT_INTENTOS and not es_ganador:
+        # Obtengo la letra y verifico que la misma esté
+        # en la palabra a adivinar.
+        letra = get_letra()
+
+        # Compruebo que la letra ya no se ha ingresado anteriormente.
+        # En caso de no estar la appendeo en la lista de letras_usadas.
+        if letra in letras_usadas:
+            print('Usted ya ingresó la letra "{}".'.format(letra))
+        else:
+            letra_favorable = verificar_letra(letra, palabra)
+
+            # En caso de no estar la letra ingresada en la palabra
+            # a adivinar incremento en 1 la variable intentos.
+            if not letra_favorable:
+                intentos += 1
+            letras_usadas.append(letra) # Agregamos la letra
+            palabra_oculta = interfaz.dibujar(palabra, letras_usadas, intentos)
+            
+            # En esta parte determinamos si el jugador gana o pierde la 
+            # partida.
+            if intentos == MAX_CANT_INTENTOS:
+                es_ganador = False
+            else:
+                # Va a ganar si la palabra coincide con las letras
+                # que el jugador ingresó. Esto ocurre únicamente si
+                # adivinó la palabra antes de acabar con los intentos
+                # permitidos.
+                if palabra == get_palabra_oculta(palabra_oculta):
+                    es_ganador = True
     return es_ganador
 
 
