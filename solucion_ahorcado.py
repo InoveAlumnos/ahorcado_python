@@ -45,18 +45,17 @@ def get_letra():
     return letra
 
 
-def get_palabra_oculta(palabra_oculta):
+def validar_palabra(letras_usadas, palabra_oculta):
     '''
-    Obtiene de la lista "palabra_oculta"
-    las letras, retornando un string de esa
-    palabra.
+    Retorna si la palabra oculta ha sido descubierta
     '''
-    palabra = ''
-    for i in range(len(palabra_oculta)):
-        # Como la letra viene con el caracter seguido
-        # de un '.', me quedo sólo con la letra.
-        palabra += palabra_oculta[i][0:-1]
-    return palabra
+    validar = True
+    for letra in palabra_oculta:
+        if letra not in letras_usadas:
+            validar = False
+            break
+    
+    return validar
 
 
 def ahorcado(palabra):
@@ -102,7 +101,7 @@ def ahorcado(palabra):
                 # que el jugador ingresó. Esto ocurre únicamente si
                 # adivinó la palabra antes de acabar con los intentos
                 # permitidos.
-                if palabra == get_palabra_oculta(palabra_oculta):
+                if validar_palabra(letras_usadas, palabra_oculta) == True:
                     es_ganador = True
     return es_ganador
 
